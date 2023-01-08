@@ -1,0 +1,11 @@
+{
+  "name": "ektm",
+  "version": "1.0.0",
+  "description": "Sistem Kartu Tanda Mahasiswa Elektronik sebagai syarat untuk meraih gelar sarjana S1",
+  "main": "app.js",
+  "scripts": {
+    "test": "npx jest --verbose"
+  },
+  "author": "Mohamad Alief Rizky Ramadhan",
+  "license": "ISC"
+}
