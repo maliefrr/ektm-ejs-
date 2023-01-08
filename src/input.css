@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bayangan {
+    text-shadow: 2px 2px 2px black;
+}
