@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
-const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcryptjs")
+const axios = require("axios")
+const asyncHandler = require("express-async-handler")
 const userModel = require("../../models/userModel.js")
 
 const getAllUser = asyncHandler( async (req,res) => {
@@ -63,29 +64,18 @@ const register = asyncHandler( async (req,res) => {
 
 const login = asyncHandler( async (req,res) => {
     const {username,password} = req.body;
+    console.log(!username)
     if(!username || !password){
-        res.status(400).json({
-            statusCode: 400,
-            message: "The field cannot be blank"
+        req.flash("err","The field cannot be blank")
+        res.redirect("/")
+    }else {
+        const response = await axios.post("http://localhost:5000/api/users/login",{
+            username,password
         })
+        console.log(response)
+        res.redirect("/");
     }
-    const user = await userModel.findOne({username})
-    if(user && await bcrypt.compare(password,user.password)){
-            res.status(200).json({
-                statusCode: 200,
-                message: "Success",
-                data: {
-                    username: user.username,
-                    email: user.email,
-                    token: getToken(user.id)
-                }
-            })
-    } else {
-        res.status(400).json({
-            statusCode: 400,
-            message: "The user or password you input are invalid"
-        })
-        }
+    
     }
 )
 

@@ -5,14 +5,13 @@ const {login} = require("../controller/webController/userController")
 router.get("/",(req,res) => {
     res.render("login",{
         title: "Login",
-        layout: "layouts/login-signup"
+        layout: "layouts/login-signup",
+        err: req.flash("err"),
+        msg: req.flash("msg")
     })
 })
 
-router.post("/",(req,res) => {
-    console.log(req.body)
-    res.redirect("/")
-})
+router.post("/",login)
 
 
 module.exports = router

@@ -1,11 +1,15 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path");
+const flash = require("connect-flash");
 const expressLayout = require("express-ejs-layouts");
-require("dotenv").config()
+const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db.js")
+const session = require("express-session");
+const mongoDbSession = require('connect-mongodb-session')(session);
 const multer = require("multer")
 const app = express()
+require("dotenv").config()
 
 connectDB()
 const port = process.env.PORT || 5000;
@@ -42,6 +46,27 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(bodyParser.json())
+
+// setting up session
+
+const store = new mongoDbSession({
+    uri: process.env.DB_URI,
+    collection: "mySession"
+})
+
+app.use(
+    session({
+        secret: process.env.SECRET,
+        resave: true,
+        saveUninitialized: false,
+        store
+    })
+)
+
+// add flash
+app.use(cookieParser(process.env.SECRET));
+app.use(flash());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
