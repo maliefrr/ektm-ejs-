@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
-const { mahasiswaModel } = require("../models/mahasiswaModel");
 const bcrypt = require("bcryptjs");
 const uploader = require("imgbb-uploader")
-const userModel = require("../models/userModel");
+const { mahasiswaModel } = require("../../models/mahasiswaModel");
+const userModel = require("../../models/userModel");
 
 
 const getAllMahasiswa = asyncHandler(async (req,res) => {

@@ -1,4 +1,4 @@
-const { addMahasiswa, getAllMahasiswa } = require("../controller/mahasiswaController")
+const { addMahasiswa, getAllMahasiswa } = require("../controller/APIController/mahasiswaController")
 const protect = require("../middleware/authHandler")
 const router = require("express").Router()
 

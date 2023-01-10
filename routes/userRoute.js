@@ -1,4 +1,4 @@
-const { getAllUser, register, login } = require("../controller/userController")
+const { getAllUser, register, login } = require("../controller/APIController/userController")
 const router = require("express").Router()
 const protect = require("../middleware/authHandler.js")
 
